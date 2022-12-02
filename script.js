@@ -33,7 +33,7 @@ enemyInfo = {
         col: 9
     },
     offset: {
-        top: 100,
+        top: 150,
         left: 60
     },
     // padding between each enemy
@@ -59,10 +59,10 @@ var saucerSound = new Howl({
 });
 
 function preload() {
-    this.load.image("shooter", "assets/cannon.png")
-    this.load.image("alien", "assets/enemy.svg")
-    this.load.image("bullet", "assets/bullet.svg")
-    this.load.image("saucer", "assets/saucer.svg")
+    this.load.image("shooter", "assets/x-wing.png")
+    this.load.image("alien", "assets/tieFighters.png")
+    this.load.image("bullet", "assets/fire.png")
+    this.load.image("saucer", "assets/deathstar.png")
 }
 
 var score = 0;
@@ -84,26 +84,26 @@ function create() {
     playerLava = scene.add.rectangle(0, 0, 800, 10, 0x000).setOrigin(0)
     enemyLava = scene.add.rectangle(0, 590, 800, 10, 0x000).setOrigin(0)
     saucerLava = scene.add.rectangle(790, 0, 10, 600, 0x000).setOrigin(0)
-        // you want see these in debug because they are apart of the scene group and not the physics group
+    // you want see these in debug because they are apart of the scene group and not the physics group
     // add to physics group
     scene.physics.add.existing(playerLava)
     scene.physics.add.existing(enemyLava)
     scene.physics.add.existing(saucerLava)
 
-        //add shooter
+    //add shooter
     // add sprite and cant drive it off edge of the screen
     shooter = scene.physics.add.sprite(400, 560, 'shooter');
     shooter.setCollideWorldBounds(true)
 
- //add text onto screen
+    //add text onto screen
     scoreText = scene.add.text(16, 16, "Score: " + score, { fontSize: '18px', fill: '#FFF' })
     livesText = scene.add.text(696, 16, "Lives: " + lives, { fontSize: '18px', fill: '#FFF' })
-      //middle of the game
+    //middle of the game
     startText = scene.add.text(400, 300, "Click to Play", { fontSize: '18px', fill: '#FFF' }).setOrigin(0.5)
 
     // add the listeners
     this.input.keyboard.on('keydown-SPACE', shoot); // shoot is a function
-    
+
     // add barrier definition with second last one removed 
     barriers.push(new Barrier(scene, 50, 450))
     barriers.push(new Barrier(scene, 370, 450))
@@ -234,7 +234,6 @@ function manageBullet(bullet) {
                 isShooting = false
 
                 scoreText.setText("Score: " + score);
-
 
                 explosionSound.play()
 
@@ -391,9 +390,9 @@ class Barrier {
         for (var r = 0; r < 3; r++) {
             for (var c = 0; c < 3; c++) {
                 // hex code 1ff56 same color as shooter
-                var child = scene.add.rectangle(x, y, 30, 20, 0x1ff56);
+                var child = scene.add.rectangle(x, y, 30, 20, 0x0000ff);
                 scene.physics.add.existing(child);
-                             // you can take 2 shots before the child is destroyed
+                // you can take 2 shots before the child is destroyed
                 // child is a block in the barrior and it is made out of 5 blocks
                 child.health = 2;
                 // push this to the array
